@@ -1,0 +1,6 @@
+This version of ruby-band is licensed under the BSD 2-clause license.
+
+* http://sciruby.com
+* http://github.com/sciruby/sciruby/wiki/License
+
+You *must* read the Contributor Agreement before contributi
