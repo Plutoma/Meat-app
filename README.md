@@ -52,4 +52,28 @@ Every row in the dataset above must meet this construction criteria: [a_nominal_
 
 The ruby-band `Core::Type::Instances` class offers a wide range of operations to easily access and modify a dataset. Some of the are very intuitive:
 ```ruby
-require '
+require 'ruby-band'
+dataset = Core::Parser.parse_ARFF(my_file.arff)
+# we can now access the dataset
+
+dataset.summary
+dataset.n_col/.n_row/.dim # R-like functions
+dataset.each_row/each_column {|row/column| function}
+```
+or we can modify it by doing:
+```ruby
+# to add a row
+dataset.add_instance ['yes','maybe',21]
+
+# to add a column
+dataset.add_numeric_attribute 'my_numeric_attribute'
+dataset.add_nominal_attribute 'my_nominal_attribute', ['ruby','is','fun']
+```
+In addition to these methods, ruby-band offers a wide range of filters to operate on the structure and the content of the Instances datasets.
+
+### How to export a dataset
+It is fairly easy to export a dataset to a CSV/ARFF file or to a Mysql table (with reference to the example above):
+```ruby
+dataset.to_ARFF my_output_file.arff
+dataset.to_CSV my_output_file.csv
+dataset.save_to_mysql 'jdbc:mysql://localhost:3306/DB_name',
