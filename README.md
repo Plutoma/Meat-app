@@ -32,4 +32,24 @@ dataset = Core::Parser.parse_CSV(my_file.csv)
 ```
 ### In-memory dataset creation
 Since the dataset type used by ruby-band is derived from Weka Instances class, we must define the domain of the data we want to insert into it. The attribute types supported by ruby-band are 'numeric', 'nominal', 'string' and 'date'. For this reason, each column in the dataset can contain only one data type to be valid.
-If you want to build an in-memory dataset you can create an empty scaffold at first, then
+If you want to build an in-memory dataset you can create an empty scaffold at first, then you populate it with your data, like this:
+```ruby
+require 'ruby-band'
+# we create a dataset containing three columns (attributes)
+dataset = Core::Type::Instances::Base.new do
+  nominal :first_attribute, ['yes','no']
+  nominal :second_attribute, ['maybe','perhaps']
+  numeric :third_attribute
+end
+```
+we can populate 'by row' our matrix-like dataset using a bidimensional array:
+```ruby
+dataset.populate_by_row([['yes','maybe',6],['no','perhaps',21]])
+```
+Every row in the dataset above must meet this construction criteria: [a_nominal_value,b_nominal_value,c_numeric value], in order to match the structure assigned during dataset initialization.
+
+### How to operate on a dataset
+
+The ruby-band `Core::Type::Instances` class offers a wide range of operations to easily access and modify a dataset. Some of the are very intuitive:
+```ruby
+require '
