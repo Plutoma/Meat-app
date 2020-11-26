@@ -21,4 +21,15 @@ Java classpath). Otherwise use:
 ## Usage
 
 ### Dataset parsing
-One central datatype of ruby-band is derived from the Weka counterpart (the class Weka.core.Instances). By instantiating this class, we obtain a matrix-like structure for storing an entire dataset. Ad-hoc methods were created to guarantee that 'Instances' class objects can be converted t
+One central datatype of ruby-band is derived from the Weka counterpart (the class Weka.core.Instances). By instantiating this class, we obtain a matrix-like structure for storing an entire dataset. Ad-hoc methods were created to guarantee that 'Instances' class objects can be converted to other datatypes (e.g. Apache matrix) and back.
+There are currently many ways to import data into ruby-band. 
+### Parsing data from ARFF/CSV files
+You can simply parse an external Weka ARFF/CSV file by doing:
+```ruby
+require 'ruby-band'
+dataset = Core::Parser.parse_ARFF(my_file.arff)
+dataset = Core::Parser.parse_CSV(my_file.csv)
+```
+### In-memory dataset creation
+Since the dataset type used by ruby-band is derived from Weka Instances class, we must define the domain of the data we want to insert into it. The attribute types supported by ruby-band are 'numeric', 'nominal', 'string' and 'date'. For this reason, each column in the dataset can contain only one data type to be valid.
+If you want to build an in-memory dataset you can create an empty scaffold at first, then
