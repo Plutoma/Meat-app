@@ -96,4 +96,19 @@ Weka::Filter::Unsupervised::Attribute::my_filter.new
 Weka::Filter::Unsupervised::Instance::my_filter.new
 ```
 
-These categories should make it clear, what the difference betw
+These categories should make it clear, what the difference between the two Discretize (Weka::Filter::Supervised:: || Unsupervised::Attribute::Discretize) filters in WEKA is. The supervised one takes the class attribute and its distribution over the dataset into account, in order to determine the optimal number and size of bins, whereas the unsupervised one relies on a user-specified number of bins.
+
+If you want to return a brief description with the required options for a selected filter class you only need to do this:
+```ruby
+filter = Weka::Filter::Unsupervised::Instance::my_filter.new
+puts filter.description
+puts filter.options_list
+```
+
+
+To apply a filter on a dataset we can use a very simple approach:
+```ruby
+dataset = Core::Parser::parse_ARFF('example_file.arff')
+
+# filter instantiation 
+filter = Weka::Filter::Supervised::Attribute::my_filter.new
