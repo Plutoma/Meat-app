@@ -152,4 +152,27 @@ eval = Weka::Attribute_selection::Evaluator::CfsSubsetEval.new
 # Search algorithm
 search = Weka::Attribute_selection::Search::GreedyStepwise.new
  
-dataset =
+dataset = Core::Parser::parse_ARFF('weather.numeric.arff')
+```
+
+And then we filter our dataset using a supervised filter:
+```ruby
+filter = Weka::Filter::Supervised::Attribute::AttributeSelection.new
+ 
+filter.set do
+  evaluator eval
+  search search
+  data dataset
+end
+ 
+filtered_dataset = filter.use
+```
+The returned Instances class object stores the results of the analysis we performed on the initial data.
+
+##Classifiers
+
+Classification and regression algorithms in WEKA are called “classifiers” and are located below the Weka::Classifier:: module. Currently, ruby-band only supports batch-trainable classifiers: this means they get trained on the whole dataset at once.
+
+If you want to return a brief description with the required options for a selected classifier class you only need to do this:
+```ruby
+classifier = Weka::Classifier::
