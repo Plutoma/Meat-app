@@ -76,4 +76,24 @@ It is fairly easy to export a dataset to a CSV/ARFF file or to a Mysql table (wi
 ```ruby
 dataset.to_ARFF my_output_file.arff
 dataset.to_CSV my_output_file.csv
-dataset.save_to_mysql 'jdbc:mysql://localhost:3306/DB_name',
+dataset.save_to_mysql 'jdbc:mysql://localhost:3306/DB_name', user_name, password, table_name
+```
+## Weka filters
+In WEKA, filters are used to preprocess the data.
+Each filter falls into one of the following two categories:
++ supervised – The filter requires a class attribute to be set.
++ unsupervised – A class attribute is not required to be present.
+
+And into one of the two sub-categories:
++ attribute-based – Columns are processed, e.g., added or removed.
++ instance-based – Rows are processed, e.g., added or deleted.
+
+As to the namespaces used for the filters available, they can be found here:
+```ruby
+Weka::Filter::Supervised::Attribute::my_filter.new
+Weka::Filter::Supervised::Instance::my_filter.new 
+Weka::Filter::Unsupervised::Attribute::my_filter.new
+Weka::Filter::Unsupervised::Instance::my_filter.new
+```
+
+These categories should make it clear, what the difference betw
