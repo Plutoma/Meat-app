@@ -128,4 +128,28 @@ to list the available options for a given filter you can use the method `filter.
 
 Preparing one’s data properly is a very important step for getting the best results. Reducing the number of attributes can not only help speeding up runtime with algorithms, but also help avoid “burying” the algorithm in a mass of attributes, when only a few are essential for building a good model. 
 
-There are three different types of evaluators in Weka at the moment: single attribute evaluators, attribute subset evaluators, attribute set evaluators. Most of the attribute selection schemes currently implemented are supervised, 
+There are three different types of evaluators in Weka at the moment: single attribute evaluators, attribute subset evaluators, attribute set evaluators. Most of the attribute selection schemes currently implemented are supervised, i.e., they require a dataset with a class attribute, but the usage (and the capabilities!) of each evaluator can be accessed by calling the method 'list_options' on an Evaluator (or Search) class object.
+
+```ruby
+# let's instantiate an evaluator
+eval = Weka::Attribute_selection::Evaluator::CfsSubsetEval.new
+
+puts eval.options_list
+
+### -M   Treat missing values as a separate value.
+### -L 	Don't include locally predictive attributes.
+
+puts eval.select_options '-M'
+```
+If we do not need to set any particular option for the evaluator and the search algorithm we can simply instantiate both classes:
+
+```ruby
+require 'ruby-band'
+ 
+# Evaluator
+eval = Weka::Attribute_selection::Evaluator::CfsSubsetEval.new
+ 
+# Search algorithm
+search = Weka::Attribute_selection::Search::GreedyStepwise.new
+ 
+dataset =
