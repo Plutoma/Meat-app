@@ -112,3 +112,20 @@ dataset = Core::Parser::parse_ARFF('example_file.arff')
 
 # filter instantiation 
 filter = Weka::Filter::Supervised::Attribute::my_filter.new
+
+# input/options handling
+filter.set do 
+  data dataset
+  filter_options '-W'
+end
+
+# return a filtered dataset
+filtered_dataset = filter.use
+```
+to list the available options for a given filter you can use the method `filter.options_list`
+
+## Weka attribute selection
+
+Preparing one’s data properly is a very important step for getting the best results. Reducing the number of attributes can not only help speeding up runtime with algorithms, but also help avoid “burying” the algorithm in a mass of attributes, when only a few are essential for building a good model. 
+
+There are three different types of evaluators in Weka at the moment: single attribute evaluators, attribute subset evaluators, attribute set evaluators. Most of the attribute selection schemes currently implemented are supervised, 
