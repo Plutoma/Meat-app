@@ -175,4 +175,31 @@ Classification and regression algorithms in WEKA are called “classifiers” an
 
 If you want to return a brief description with the required options for a selected classifier class you only need to do this:
 ```ruby
-classifier = Weka::Classifier::
+classifier = Weka::Classifier::Lazy::my_classifier.new
+puts classifier.description
+puts classifier.list_options
+```
+
+It is fairly easy to build a classifier using the ruby-band APIs:
+```ruby
+classifier = Weka::Classifier::Lazy::KStar::Base.new do
+  set_options '-M d'
+  set_data dataset
+  set_class_index 4
+end
+```
+we can then evaluate the trained classifier using cross-validation: 
+```ruby
+classifier.cross_validate(3) # ARG is 'folds' used by cross-validation 
+```
+Alternatively, a test set can be for evaluation used by doing:
+```ruby
+test_set = Core::Parser::parse_ARFF 'some/where/file.arff'
+test_set.set_class_index(0)
+
+evaluator = Weka::Classifier::Evaluation.new $filtered_dataset
+puts evaluator.evaluate_model(classifier,test_data)
+```
+
+###Classifying instances
+In case you have an unlabeled dataset that you want to classify with your newly
