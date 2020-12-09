@@ -202,4 +202,19 @@ puts evaluator.evaluate_model(classifier,test_data)
 ```
 
 ###Classifying instances
-In case you have an unlabeled dataset that you want to classify with your newly
+In case you have an unlabeled dataset that you want to classify with your newly trained classifier, you can use the following code snippet.
+```ruby
+# 'unlabeled' is a dataset with class index set, but no class value
+unlabeled.each_row_with_index do |instance,id|
+  label = classifier.classify_instance instance
+  unlabeled.instance(id).set_class_value label
+end
+
+unlabeled.to_ARF/to_CSV 'my_file.arff' # save dataset with inserted class values
+```
+
+##Clusterers
+
+Clustering is an unsupervised Machine Learning technique of finding patterns in the data, i.e., these algorithms work without class attributes. Classifiers, on the other hand, are supervised and need a class attribute. This section, similar to the one about classifiers, covers the following topics:
+* Building a clusterer - batch (incremental must still be implemented) learning. 
+* Evaluating
