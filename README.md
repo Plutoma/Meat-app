@@ -217,4 +217,19 @@ unlabeled.to_ARF/to_CSV 'my_file.arff' # save dataset with inserted class values
 
 Clustering is an unsupervised Machine Learning technique of finding patterns in the data, i.e., these algorithms work without class attributes. Classifiers, on the other hand, are supervised and need a class attribute. This section, similar to the one about classifiers, covers the following topics:
 * Building a clusterer - batch (incremental must still be implemented) learning. 
-* Evaluating
+* Evaluating a clusterer - how to evaluate a built clusterer. 
+* Clustering instances -  determining what clusters unknown instances belong to.
+
+Clusterers, just like classifiers, are by design batch-trainable as well. They all can be built on data that is completely stored in memory. But a small subset of the cluster algorithms can also update the internal representation incrementally (this functionality must still be implemented, along with the ‘incremental’ mode for classifiers).
+
+If you want to return a brief description and the options list for a selected clusterer class you only need to do this:
+```ruby
+clusterer = Weka::Clusterer::my_clusterer.new
+puts clusterer.description
+puts clusterer.list_options
+```
+
+This is an example of the usage for SimpleKMeans class:
+```ruby
+# load dataset
+data_instance = Core::Parser::parse_ARFF 'some/whe
