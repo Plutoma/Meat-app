@@ -232,4 +232,24 @@ puts clusterer.list_options
 This is an example of the usage for SimpleKMeans class:
 ```ruby
 # load dataset
-data_instance = Core::Parser::parse_ARFF 'some/whe
+data_instance = Core::Parser::parse_ARFF 'some/where/file.arff'
+kmeans = Weka::Clusterer::SimpleKMeans::Base.new do
+  set_data data_instance
+  set_options "-N 10 -c last"
+end
+# access description and available options
+kmeans.list_options
+kmeans.description
+```
+### Evaluating a clusterer
+The evaluation on a built clusterer can be performed like this:
+```ruby
+puts kmeans.evaluate
+# or, if you want to evaluate the model on a different dataset
+puts clusterer.evaluate(dataset)
+```
+### Adding a 'cluster' attribute to a dataset
+After performing clustering on a training set, we can use the clusterer to assign a 'cluster label' to a new dataset. In order to do this, we add a new 'cluster' attribute to the dataset, and we subsequently fill it with cluster assignments.
+```ruby
+# remember the 'data_instance' dataset from the previous example
+filter = Weka::Filter::Unsupervised:
