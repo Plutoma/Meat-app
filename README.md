@@ -252,4 +252,21 @@ puts clusterer.evaluate(dataset)
 After performing clustering on a training set, we can use the clusterer to assign a 'cluster label' to a new dataset. In order to do this, we add a new 'cluster' attribute to the dataset, and we subsequently fill it with cluster assignments.
 ```ruby
 # remember the 'data_instance' dataset from the previous example
-filter = Weka::Filter::Unsupervised:
+filter = Weka::Filter::Unsupervised::Attribute::AddCluster.new
+filter.set do
+  data data_instance
+  clusterer kmeans
+end
+# now fill the attribute with values
+data_instance.each_row do |inst|
+  puts "Inst: #{inst.to_string}\t\t Cluster assignment #{kmeans.cluster_instance(inst)}"
+end
+```
+
+## Classes to clusters
+Datasets for supervised algorithms, like classifiers, can be used to evaluate a clusterer as well. This evaluation is called classes-to-clusters, as the clusters are mapped back onto the classes.
+
+In this mode Weka first ignores the class attribute and generates the clustering. Then during the test phase it assigns classes to the clusters, based on the majority value of the class attribute within each cluster. Then it computes the classification error, based on this assignment.
+```ruby
+# parse dataset
+dataset = Core::Parser::parse_CSV some_data
