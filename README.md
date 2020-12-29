@@ -269,4 +269,43 @@ Datasets for supervised algorithms, like classifiers, can be used to evaluate a 
 In this mode Weka first ignores the class attribute and generates the clustering. Then during the test phase it assigns classes to the clusters, based on the majority value of the class attribute within each cluster. Then it computes the classification error, based on this assignment.
 ```ruby
 # parse dataset
-dataset = Core::Parser::parse_CSV some_data
+dataset = Core::Parser::parse_CSV some_data.csv
+ 
+# eliminate class values
+filter = Weka::Unsupervised::Attribute::Remove.new
+filter.set do
+  attribute_indices "#{dataset.class_index+1}"
+  data dataset
+end
+unlabeled_dataset = filter.use
+ 
+# instantiate the clusterer
+clusterer = Weka::Clusterer::EM.new { set_data unlabeled_dataset}
+ 
+# evaluate the clusterer
+puts clusterer.evaluate(dataset)
+```
+
+## Developers
+
+To use the library 
+
+    require 'ruby-band'
+
+The API doc is online. For more code examples see also the test files in the
+source tree.
+
+## Project home page
+
+Information on the source tree, documentation, issues and how to contribute,
+see
+
+http://github.com/arrigonialberto86/ruby-band
+
+The BioRuby community is on IRC server: irc.freenode.org, channel: #bioruby.
+
+## Cite
+
+If you use this software, please cite one of
+
+*   [BioRuby: bioinformatics software for the Ruby pr
