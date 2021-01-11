@@ -308,4 +308,13 @@ The BioRuby community is on IRC server: irc.freenode.org, channel: #bioruby.
 
 If you use this software, please cite one of
 
-*   [BioRuby: bioinformatics software for the Ruby pr
+*   [BioRuby: bioinformatics software for the Ruby programming
+    language](http://dx.doi.org/10.1093/bioinformatics/btq475)
+*   [Biogem: an effective tool-based approach for scaling up open source
+    software development in
+    bioinformatics](http://dx.doi.org/10.1093/bioinformatics/bts080)
+
+
+## Copyright
+
+Copyright (c) 2013 arrigonialberto86. See LICENSE.txt for further details.
