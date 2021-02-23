@@ -49,4 +49,26 @@ class Trial < Sinatra::Base
   get '/filter' do
     session[:init] = true
     $dataset_in = session[:datasets][params[:dataset_in]]
+    filter = eval("Weka::#{params[:filter_name]}.new")
+    $params = params
+    filter.set do
+      filter_options $params[:filter_options].split("_").join(" ")
+      data $dataset_in 
+    end
+    filtered_data = filter.use
+    session[:datasets][params[:dataset_out]] = filtered_data
+  end
+
+  get '/train_classifier' do
+    session[:init] = true
+    @dataset_in = session[:datasets][params[:dataset_in]]
+    classifier = eval("Weka::#{params[:classifier_name]}.new")  
+    classifier.set_options params[:classifier_options].split("_").join(" ") if params[:classifier_options]
+    @dataset_in.setClassIndex(params[:class_index].to_i)
+    classifier.set_data @dataset_in
+    classifier.build_classifier(@dataset_in)
+    session[:classifiers][params[:model_name]] = classifier
+    classifier.to_s
+  end
+
   
