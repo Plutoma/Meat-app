@@ -71,4 +71,20 @@ class Trial < Sinatra::Base
     classifier.to_s
   end
 
-  
+  get '/crossvalidate_classifier' do
+    session[:init] = true
+    classifier = session[:classifiers][params[:model_name]]
+    fold = params[:fold].to_i
+    eval = Weka::Classifiers::Evaluation.new classifier.instance_eval("@dataset")
+    eval.crossValidateModel(classifier.class.new, classifier.instance_eval("@dataset"), fold.to_java(:int), Random.new(1))
+    eval.summary
+  end
+
+  post '/clear' do
+    session.clear
+    puts "Session is now cleared"
+  end
+
+end
+
+Trial.run!
