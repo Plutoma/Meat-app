@@ -1,4 +1,35 @@
 #!/usr/bin/env ruby
 #
 # BioRuby ruby-band Plugin RubyBand
-# Author:
+# Author:: arrigonialberto86
+# Copyright:: 2013
+
+USAGE = "Describe ruby-band"
+
+gempath = File.dirname(File.dirname(__FILE__))
+$: << File.join(gempath,'lib')
+
+VERSION_FILENAME=File.join(gempath,'VERSION')
+version = File.new(VERSION_FILENAME).read.chomp
+
+# print banner
+print "ruby-band #{version} by arrigonialberto86 2013\n"
+
+if ARGV.size == 0
+  print USAGE
+end
+
+require 'ruby-band'
+require 'optparse'
+
+# Uncomment when using the bio-logger 
+# require 'bio-logger'
+# Bio::Log::CLI.logger('stderr')
+# Bio::Log::CLI.trace('info')
+
+options = {:example_switch=>false,:show_help=>false}
+opts = OptionParser.new do |o|
+  o.banner = "Usage: #{File.basename($0)} [options] reponame\ne.g. #{File.basename($0)} the-perfect-gem"
+
+  o.on('--example_parameter [EXAMPLE_PARAMETER]', 'TODO: put a description for the PARAMETER') do |example_parameter|
+    # T
