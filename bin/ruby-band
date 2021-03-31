@@ -57,4 +57,27 @@ opts = OptionParser.new do |o|
   # end
   # 
   # o.on("-v", "--verbose", "Run verbosely") do |v|
-  #   Bio::Log::CLI.trace(
+  #   Bio::Log::CLI.trace('info')
+  # end
+  # 
+  # o.on("--debug", "Show debug messages") do |v|
+  #   Bio::Log::CLI.trace('debug')
+  # end
+
+  o.separator ""
+  o.on_tail('-h', '--help', 'display this help and exit') do
+    options[:show_help] = true
+  end
+end
+
+begin
+  opts.parse!(ARGV)
+
+  # Uncomment the following when using the bio-logger 
+  # Bio::Log::CLI.configure('ruby-band')
+
+  # TODO: your code here
+  # use options for your logic
+rescue OptionParser::InvalidOption => e
+  options[:invalid_argument] = e.message
+end
