@@ -11,4 +11,39 @@ module OS
   end
 
   def OS.mac?
-   (/darwin/ =~ RbConfig::CONFIG['ho
+   (/darwin/ =~ RbConfig::CONFIG['host_os']) != nil
+  end
+
+  def OS.unix?
+    !OS.windows?
+  end
+  
+  def OS.linux?
+    OS.unix? and not OS.mac?
+  end
+end
+
+File.open(File.join(path,"Rakefile"),"w") do |rakefile|
+  
+  if OS.windows? == true
+    puts "Sorry, still no support is provided for your OS!" 
+  
+  elsif OS.mac? == true
+    if command?("mvn")==false && command?("brew")==true
+      rakefile.write <<-RAKE
+        task :brew_install do
+          sh "brew install maven"
+        end
+        task :default => [:brew_install]
+      RAKE
+    elsif command?("brew")==false
+      rakefile.write <<-RAKE
+      task :ok_inst do
+        puts "Sorry, Maven could not be installed. Try installing 'brew' first"
+      end
+      task :default => [:ok_inst]
+RAKE
+    else
+      rakefile.write <<-RAKE
+    task :ok_inst do
+      puts "Maven has been detected
