@@ -46,4 +46,29 @@ RAKE
     else
       rakefile.write <<-RAKE
     task :ok_inst do
-      puts "Maven has been detected
+      puts "Maven has been detected on your system"
+    end
+    task :default => [:ok_inst]
+RAKE
+    end
+  elsif OS.linux? == true
+    if command?("mvn")==false
+      rakefile.write <<-RAKE
+  	    task :apt_install do
+          sh "sudo apt-get install maven2"
+        end
+        task :default => [:apt_install]
+      RAKE
+    else
+      rakefile.write <<-RAKE
+    task :ok_inst do
+      puts "Maven has been detected on your system"
+    end
+    task :default => [:ok_inst]
+RAKE
+    end
+  end
+end
+
+
+
