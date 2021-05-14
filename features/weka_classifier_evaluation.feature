@@ -33,4 +33,17 @@ Feature: Evaluating a Weka classifier
     And I want to get the F-measure of the evaluation with the class index
     And I want to get the weighted Fmeasure of the evaluation
     And I want to get the weighted F-measure of the evaluation
-    And I want to get the area under ROC of the evaluation
+    And I want to get the area under ROC of the evaluation with the class index
+    And I want to get the weighted area under ROC of the evaluation
+    And I want to get the area under PRC of the evaluation with the class index
+    And I want to get the weighted area under PRC of the evaluation
+    And I want to get the error rate of the evaluation
+    And I want to get the instance count of the evaluation
+    And I want to get the correct count of the evaluation
+    And I want to get the incorrect count of the evaluation
+    And I want to get the unclassified count of the evaluation
+    And I want to get the correct percentage of the evaluation
+    And I want to get the incorrect percentage of the evaluation
+    And I want to get the unclassified percentage of the evaluation
+    And I want to get the SF entropy gain of the evaluation
+    And I want to
