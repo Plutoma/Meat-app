@@ -46,4 +46,18 @@ Feature: Evaluating a Weka classifier
     And I want to get the incorrect percentage of the evaluation
     And I want to get the unclassified percentage of the evaluation
     And I want to get the SF entropy gain of the evaluation
-    And I want to
+    And I want to get the KB mean information of the evaluation
+    And I want to get the confusion matrix of the evaluation
+    And I want to get the total cost of the evaluation
+    And I want to get the average cost of the evaluation
+
+  Examples: Classifiers
+    | classifier           | options | index | file                 |
+    | Bayes::NaiveBayes    | -K      | 0     | weather.numeric.arff |
+    | Lazy::KStar          | -M d    | 0     | weather.numeric.arff |
+    | Trees::RandomForest  | -I 10   | 0     | weather.numeric.arff |
+    | Functions::Logistic  |         | 0     | weather.numeric.arff |
+    | Rules::DecisionTable |         | 0     | weather.numeric.arff |
+    | Meta::LogitBoost     |         | 0     | weather.numeric.arff |
+
+  Scenario: Receiving performance curve 
