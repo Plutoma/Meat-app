@@ -23,4 +23,14 @@ Feature: Evaluating a Weka classifier
     And I want to get the false negative rate of the evaluation with the class index
     And I want to get the weighted true negative rate of the evaluation
     And I want to get the weighted true positive rate of the evaluation
-    And I want to get the weight
+    And I want to get the weighted false positive rate of the evaluation
+    And I want to get the weighted false negative rate of the evaluation
+    And I want to get the true negative count of the evaluation with the class index
+    And I want to get the true positive count of the evaluation with the class index
+    And I want to get the false negative count of the evaluation with the class index
+    And I want to get the false positive count of the evaluation with the class index
+    And I want to get the Fmeasure of the evaluation with the class index
+    And I want to get the F-measure of the evaluation with the class index
+    And I want to get the weighted Fmeasure of the evaluation
+    And I want to get the weighted F-measure of the evaluation
+    And I want to get the area under ROC of the evaluation
