@@ -12,3 +12,15 @@ Feature: Evaluating a Weka classifier
     And I want to cross validate the classifier
     And I want to get the summary of the evaluation
     And I want to get the class details of the evaluation
+    And I want to get the cumulative margin distribution of the evaluation
+    And I want to get the precision of the evaluation with the class index
+    And I want to get the recall of the evaluation with the class index
+    And I want to get the weighted precision of the evaluation
+    And I want to get the weighted recall of the evaluation
+    And I want to get the true negative rate of the evaluation with the class index
+    And I want to get the true positive rate of the evaluation with the class index
+    And I want to get the false positive rate of the evaluation with the class index
+    And I want to get the false negative rate of the evaluation with the class index
+    And I want to get the weighted true negative rate of the evaluation
+    And I want to get the weighted true positive rate of the evaluation
+    And I want to get the weight
