@@ -60,4 +60,10 @@ Feature: Evaluating a Weka classifier
     | Rules::DecisionTable |         | 0     | weather.numeric.arff |
     | Meta::LogitBoost     |         | 0     | weather.numeric.arff |
 
-  Scenario: Receiving performance curve 
+  Scenario: Receiving performance curve data of a classifier
+    Given the unsupervised Weka classifier "Trees::RandomForest"
+    And I want to set the dataset parsed from "weather.numeric.arff"
+    And I want to set the class index for attribute with index "0"
+    And I want to instantiate the classifier for my use
+    And I want to cross validate the classifier
+    And I want to get the performance curves of the classifier
