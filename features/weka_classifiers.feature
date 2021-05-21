@@ -79,4 +79,15 @@ Feature: Using a Weka classifier
     Given the unsupervised Weka classifier "<classifier>"
     And I want to instantiate it with the options "<options>"
     And I want to instantiate it with the class_index "<index>"
-    And I want to instantiate it with 
+    And I want to instantiate it with a dataset parsed from "<file>"
+    And I want to print a summary for the dataset
+    Then I am able to instantiate the classifier with a block
+
+  Examples: Classifiers
+    | classifier           | options | index | file                    |
+    | Bayes::NaiveBayes    | -K      | 0     | weather.numeric.arff    |
+    | Lazy::KStar          | -M d    | 0     | weather.numeric.arff    |
+    | Trees::RandomForest  | -I 10   | 0     | weather.numeric.arff    |
+    | Functions::Logistic  |         | 0     | weather.numeric.arff    |
+    | Rules::DecisionTable |         | 0     | weather.numeric.arff    |
+    | Meta::LogitBoost     |         | 0     | weather.numeric.arff |
