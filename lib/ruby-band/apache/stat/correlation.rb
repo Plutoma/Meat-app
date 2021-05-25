@@ -30,4 +30,13 @@ module Apache
 
       # Calculate Spearman correlation between two Numeric arrays
       # * *Args*    :
-      #   - +Array1+ -> m
+      #   - +Array1+ -> must be a RubyArray.
+      #   - +Array2+ -> must be a RubyArray.
+      def self.spearman_correlation(array_1,array_2)
+        obj = SpearmansCorrelation.new
+        result = obj.correlation(array_1.to_java(:double),array_2.to_java(:double))
+        result
+      end
+  	end
+  end
+end
