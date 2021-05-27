@@ -30,4 +30,36 @@ module Core
           if a.isNumeric  
             enumerate_instances.each {|s| att << s.value(s.attribute(idx))}
             matrix << att
-            att = A
+            att = Array.new
+          else
+            enumerateInstances.each do |inst|
+              att << inst.string_value(idx)
+            end
+            matrix << att
+            att = Array.new
+          end
+        end
+        return matrix.transpose
+      end
+
+      # Return the number of rows (Instance objects) in the dataset
+      def n_rows
+        return numInstances
+      end
+
+      # Return the number of columns (Attribute objects) in the dataset
+      def n_col
+        return numAttributes
+      end
+
+      # Return the dimensions of the dataset (for the current Instances class object)
+      def dim
+        puts "Rows number:\t#{numInstances}\nColumns number:\t #{numAttributes}"
+      end
+
+      def each_row
+        enumerate_instances.each {|inst| yield(inst)}
+      end
+
+      def each_row_with_index
+     
