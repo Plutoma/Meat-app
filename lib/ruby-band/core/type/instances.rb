@@ -62,4 +62,29 @@ module Core
       end
 
       def each_row_with_index
-     
+        enumerate_instances.each_with_index {|inst,id| yield(inst,id)}
+      end
+
+      def each_column
+        enumerate_attributes.each {|attribute| yield(attribute)}
+      end
+
+      def each_column_with_index
+        enumerate_attributes.each_with_index {|attribute,id| yield(attribute,id)}
+      end
+
+      # Check if this instance's attributes are all Numeric
+      def check_numeric_instance
+        enumerateAttributes.each do |att|
+          unless att.isNumeric
+            raise ArgumentError, "Sorry, attribute '#{att.name}' is not numeric!"
+          end
+        end
+      end
+
+      # Convert the present Instances object to an Apache matrix if every Instances attribute
+      # is Numeric 
+      def to_Apache_matrix
+        check_numeric_instance
+        ruby_array = to_a
+        java_double_array = Core::Utils::bidimensional_to_doub
