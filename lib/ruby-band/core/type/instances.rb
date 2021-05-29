@@ -87,4 +87,26 @@ module Core
       def to_Apache_matrix
         check_numeric_instance
         ruby_array = to_a
-        java_double_array = Core::Utils::bidimensional_to_doub
+        java_double_array = Core::Utils::bidimensional_to_double(ruby_array)
+        return Core::Type::Apache_matrix.new(java_double_array)
+      end
+
+      # Convert the present Instances object to an Apache matrix (block) if every Instances attribute
+      # is Numeric 
+      def to_Apache_matrix_block
+        check_numeric_instance
+        ruby_array = to_a
+        java_double_array = Core::Utils::bidimensional_to_double(ruby_array)
+        return Core::Type::Apache_matrix_block.new(java_double_array)
+      end
+
+      # Return data for a single attribute (a column from the Instances object)
+      # * *Args*    :
+      #   - +att+ -> a String, the name of the attribute
+      def return_attr_data(att)
+        attr_values = Array.new
+        if attribute(att).isNumeric
+          enumerateInstances.each do |i|
+            attr_values << i.value(attribute(att))
+          end
+        
