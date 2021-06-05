@@ -109,4 +109,27 @@ module Core
           enumerateInstances.each do |i|
             attr_values << i.value(attribute(att))
           end
-        
+        else
+          attr_index = attribute(att).index
+          enumerateInstances.each do |inst|
+            attr_values << inst.string_value(attr_index)
+          end
+        end
+        return attr_values
+      end
+
+      # Return the mean value of a single attribute (a column from the Instances object)
+      # * *Args*    :
+      #   - +attribute_name+ -> a String, the name of the attribute      
+      def mean(attribute_name) 
+        sum = enumerateInstances.inject(0) do |s,x|
+          s+=x.value(attribute(attribute_name))
+        end
+        return sum/(numInstances*1.0)
+      end
+
+      # Return the variance of a single attribute (a column from the Instances object)
+      # * *Args*    :
+      #   - +attribute_name+ -> a String, the name of the attribute    
+      def variance(attribute_name) 
+        enumerateAttributes.each_with_idx do |att,id
