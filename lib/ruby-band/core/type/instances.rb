@@ -132,4 +132,31 @@ module Core
       # * *Args*    :
       #   - +attribute_name+ -> a String, the name of the attribute    
       def variance(attribute_name) 
-        enumerateAttributes.each_with_idx do |att,id
+        enumerateAttributes.each_with_idx do |att,idx|
+          return variance(idx) if att.name==attribute_name
+        end
+      end      
+
+      # Write the content of the current Instances object to a .csv file
+      # * *Args*    :
+      #   - +out_file+ -> a String, the name of the output file  
+      def to_CSV(out_file)
+        saver = CSVSaver.new
+        saver.setInstances(self)
+        out_file = File.new out_file
+        saver.setFile(out_file);
+        saver.writeBatch();
+      end
+
+      # Write the content of the current Instances object to a .arff file
+      # * *Args*    :
+      #   - +out_file+ -> a String, the name of the output file 
+      def to_ARFF(out_file)
+        saver = ArffSaver.new
+        saver.setInstances(self)
+        out_file = File.new out_file
+        saver.setFile(out_file);
+        saver.writeBatch();
+      end
+
+      def insert_attribute(at
