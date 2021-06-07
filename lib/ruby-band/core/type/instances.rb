@@ -159,4 +159,27 @@ module Core
         saver.writeBatch();
       end
 
-      def insert_attribute(at
+      def insert_attribute(attribute_value,position)
+        att=attribute_value
+        if self.attribute(position).isNumeric
+          return attribute_value
+        elsif self.attribute(position).isNominal
+          idx = self.attribute(position).indexOfValue(attribute_value)
+          return idx
+        elsif self.attribute(position).isDate
+          date = self.attribute(position).ParseDate(attribute_value)
+          return date
+        else
+          puts 'Attribute type is unknown!'
+        end
+      end
+      private :insert_attribute
+
+      # (check function): should check that the array is bidimensional and that
+      # the lengths are equal
+      def check_array(data)
+        return true # still to be done
+      end
+
+      # An entire dataset is inserted 'by row' into the current Instances object 
+      # i.e. one Instance object is inserted at the 
