@@ -182,4 +182,31 @@ module Core
       end
 
       # An entire dataset is inserted 'by row' into the current Instances object 
-      # i.e. one Instance object is inserted at the 
+      # i.e. one Instance object is inserted at the time
+      # * *Args*    :
+      #   - +data+ -> a bidimensional array 
+      def populate_by_row(data)
+        unless check_array(data) == false
+          data.each do |row|
+            add_instance(row)
+          end
+        end
+      end
+
+      # An Instance instance object (one row) is inserted into the current Instances object 
+      # * *Args*    :
+      #   - +instance+ -> an array of values of the correct data type (:nominal,:numeric,etc...)
+      def add_instance(instance)
+        data_ref = Array.new
+
+        instance.each_with_index do |attribute,idx|
+          data_ref << insert_attribute(attribute,idx)
+        end
+
+        double_array = data_ref.to_java :double
+        single_row = DenseInstance.new(1.0, double_array)
+
+        self.add(single_row)
+      end
+
+      # An Attribute instance object
