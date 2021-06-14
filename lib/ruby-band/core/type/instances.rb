@@ -229,4 +229,30 @@ module Core
         list_values.each do |val|
           values.addElement(val)         
         end
-   
+        insertAttributeAt(Attribute.new(attribute, values), self.numAttributes)
+      end      
+
+      #Print to STDOUT the list of the Instances's attributes (with the corresponding types)
+      def summary
+        summary = Ruport::Data::Table::new
+        summary.add_column 'Attributes'
+        enumerateAttributes.each_with_index do |att,idx| 
+          summary.add_column idx
+        end
+ 
+        att_names = ['Names']
+        enumerateAttributes.each do |att| 
+          att_names << "'#{att.name}'"
+        end
+        summary << att_names
+
+        att_types = ['Types']
+        enumerateAttributes.each do |att|
+          att_types << "Numeric" if att.isNumeric 
+          att_types << "Nominal" if att.isNominal
+          att_types << "Date" if att.isDate
+          att_types << "String" if att.isString
+        end
+        summary << att_types
+
+        
