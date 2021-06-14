@@ -209,4 +209,24 @@ module Core
         self.add(single_row)
       end
 
-      # An Attribute instance object
+      # An Attribute instance object is inserted into the current Instances object  
+      # * *Args*    :
+      #   - +attribute_name+ -> A name for the new attribute
+      # * *WARNING*    :
+      # This method only creates an empty attribute field
+      def add_numeric_attribute(attribute_name)
+        insertAttributeAt(Attribute.new(attribute_name), self.numAttributes)
+      end
+
+      # An Attribute instance object is inserted into the current Instances object  
+      # * *Args*    :
+      #   - +attribute_name+ -> A name for the new attribute
+      #   - +values+ -> RubyArray with nominal values 
+      # * *WARNING*    :
+      # This method only creates an empty attribute field
+      def add_nominal_attribute(attribute,list_values)
+        values = FastVector.new
+        list_values.each do |val|
+          values.addElement(val)         
+        end
+   
