@@ -255,4 +255,26 @@ module Core
         end
         summary << att_types
 
-        
+        display = []
+        display << summary
+
+        unless enumerate_instances.nil?
+          count=0
+          enumerateInstances.each {|inst| count=count+1}
+          display << "\nNumber of rows: #{count}"
+        end
+        display 
+      end
+
+      # Merges two sets of Instances together. The resulting set will have all the
+      # attributes of the first set plus all the attributes of the second set. The
+      # number of instances in both sets must be the same.
+      # * *Args*    :
+      #   - +instances+ -> An Instances class object
+      def merge_with(instances)
+        return Instances.mergeInstances(self,instances)
+      end
+
+      # This method creates an Instances object (see Cucumber documentation for further details)
+     # def self.create
+     #   name = 'I
