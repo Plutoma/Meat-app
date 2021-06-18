@@ -277,4 +277,18 @@ module Core
 
       # This method creates an Instances object (see Cucumber documentation for further details)
      # def self.create
-     #   name = 'I
+     #   name = 'Instances'
+     #   instances = Core::Type.create_instances(name,@@positions)
+     #   return instances
+     # end
+
+      # This method is used for attributes definition in uninitialized Instances-derived classes
+      def att(attr_type,name,*values)
+        att = Core::Type.create_numeric_attr(name.to_java(:string)) if attr_type == :numeric
+        att = Core::Type.create_nominal_attr(name.to_java(:string),values[0]) if attr_type == :nominal
+        att = Core::Type.create_date_attr(name.to_java(:string),values[0]) if attr_type == :date
+        att = att = Core::Type.create_string_attr(name.to_java(:string)) if attr_type == :string      
+        @positions << att
+      end
+
+      # This method is used for Nominal attributes definition in uninitialized Instances-derived 
