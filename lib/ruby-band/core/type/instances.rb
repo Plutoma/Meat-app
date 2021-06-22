@@ -291,4 +291,28 @@ module Core
         @positions << att
       end
 
-      # This method is used for Nominal attributes definition in uninitialized Instances-derived 
+      # This method is used for Nominal attributes definition in uninitialized Instances-derived classes
+      # * *Args*    :
+      #   - +name+ -> Attribute name, a String
+      #   - +values+ -> An array of values for the nominal attribute
+      def nominal(name,values)
+        att :nominal, name, values
+      end
+
+      # This method is used for Numeric attributes definition in uninitialized Instances-derived classes
+      # * *Args*    :
+      #   - +name+ -> Attribute name, a String
+      def numeric(name)
+        att :numeric, name
+      end
+
+      # This method is used for Date attributes definition in uninitialized Instances-derived classes
+      # * *Args*    :
+      #   - +name+ -> Attribute name, a String
+      def date(name)
+        att :date, name
+      end
+
+      # This method is used for String attributes definition in uninitialized Instances-derived classes
+      # * *Args*    :
+      #   -
