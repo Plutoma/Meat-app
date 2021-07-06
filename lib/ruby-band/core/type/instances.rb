@@ -315,4 +315,25 @@ module Core
 
       # This method is used for String attributes definition in uninitialized Instances-derived classes
       # * *Args*    :
-      #   -
+      #   - +name+ -> Attribute name, a String
+      def string(name)
+        att :string, name
+      end
+
+      # Class used for the creation of a new dataset (Instances class)
+      class Base < Instances
+        def initialize(&block)
+          attributes_vector = FastVector.new
+          @positions = []
+          self.instance_eval(&block) if block
+          @positions.each {|value| attributes_vector.addElement(value)}
+          super('Instances',attributes_vector,0)
+        end
+      end
+
+      # Return a json String for the current Instances object
+      # The output is modeled on the 'datatable' Google charts APIs 
+      # More details at: 'https://developers.google.com/chart/interactive/docs/reference#DataTable'
+      def to_json_format
+        dataset_hash = Hash.new
+        d
