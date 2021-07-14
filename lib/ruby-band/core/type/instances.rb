@@ -336,4 +336,29 @@ module Core
       # More details at: 'https://developers.google.com/chart/interactive/docs/reference#DataTable'
       def to_json_format
         dataset_hash = Hash.new
-        d
+        dataset_hash[:cols] = enumerateAttributes.collect {|attribute| attribute.name}
+        dataset_hash[:rows] = enumerateInstances.collect {|instance| instance.toString} 
+        return JSON.pretty_generate(dataset_hash)
+      end
+    end #Instances class
+
+    # Create an Instances object
+    # * *Args*    :
+    #   - +name+ -> A name for the Instances object
+    #   - +attributes+ -> An array containing Attribute objects
+    def Type.create_instances(name,attributes)
+      attributes_vector = FastVector.new
+      attributes.each {|value| attributes_vector.addElement(value)}
+      return Instances.new(name,attributes_vector,0)
+    end
+
+  end
+  # Helper class for serialization
+  # Works with classifiers, filters, clusterers...
+  class SerializationHelper
+  end
+  
+end
+
+
+
