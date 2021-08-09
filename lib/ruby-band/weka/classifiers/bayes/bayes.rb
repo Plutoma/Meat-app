@@ -12,4 +12,7 @@ module Weka
                     :NaiveBayesMultinomial,
                     :NaiveBayesMultinomialText,
                     :NaiveBayesMultinomialUpdateable,
-                    :NaiveBayesU
+                    :NaiveBayesUpdateable
+    end
+  end
+end
