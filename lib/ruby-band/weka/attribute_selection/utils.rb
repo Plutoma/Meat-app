@@ -9,4 +9,16 @@ module Weka
       end
 
       # Set options for an evaluator or a search algorithm
-      def select_options(opti
+      def select_options(options_string)
+        options = Utils.splitOptions(options_string)
+        set_options(options)
+      end
+
+      # Return a short description for the selected evalutator object or search algorithm
+      def description
+        globalInfo
+      end
+
+    end
+  end
+end
