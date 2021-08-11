@@ -12,4 +12,16 @@ module Weka
                     :AttributeSelectedClassifier,
                     :Bagging,
                     :ClassificationViaRegression,
-                    :CostSe
+                    :CostSensitiveClassifier,
+                    :FilteredClassifier,
+                    :LogitBoost,
+                    :MultiClassClassifier,
+                    :MultiClassClassifierUpdateable,
+                    :MultiScheme,
+                    :RandomCommittee,
+                    :RandomSubSpace,
+                    :RegressionByDiscretization,
+                    :Stacking
+    end
+  end
+end
