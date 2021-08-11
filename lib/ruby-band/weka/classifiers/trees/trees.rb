@@ -9,4 +9,12 @@ module Weka
 
       build_classes :DecisionStump,
                     :HoeffdingTree,
-           
+                    :J48,
+                    :LMT,
+                    :M5P,
+                    :RandomForest,
+                    :RandomTree,
+                    :REPTree
+    end
+  end
+end
