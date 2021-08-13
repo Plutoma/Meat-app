@@ -49,4 +49,30 @@ module Weka
 
       # Returns a description from the Weka JavaDoc for the selected classifier
       def description
-     
+        puts globalInfo
+      end
+
+      # Performs cross validation on a trained classifier
+      # ARGV:
+      # fold -> 'int' value
+      def cross_validate(fold)
+        if self.class.data
+          evaluation = Weka::Classifiers::Evaluation.new self.class.data
+          evaluation.crossValidateModel(self.class.ancestors[2].new, self.class.data, fold.to_java(:int), Random.new(1))
+          evaluation
+        else
+          evaluation = Weka::Classifiers::Evaluation.new @dataset
+          evaluation.crossValidateModel(self.class.ancestors[1].new, @dataset, fold.to_java(:int), Random.new(1))
+          evaluation
+        end
+      end
+
+      # Class methods module
+      module ClassMethods
+
+        def self.classifier_attr_accessor(*args)
+          args.each do |arg|
+            # Here's the getter
+            self.class_eval("def #{arg};@#{arg};end")
+            # Here's the setter
+           
