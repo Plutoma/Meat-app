@@ -48,4 +48,33 @@ module Weka
         getClusterCentroids
       end
 
-      #list cluster's capabilities with attribu
+      #list cluster's capabilities with attributes (i.e Numeric, Nominal...)
+      def list_capabilities
+        get_capabilities.to_s
+      end
+
+      # Validate clusterer. If the evaluation needs to be performed on a different dataset this function accepts
+      # an optional parameter (an Instances class object)
+      def evaluate(*args)
+        evaluation = ClusterEvaluation.new
+        evaluation.setClusterer(self)
+
+        if not args[0]
+          if self.class.data
+            evaluation.evaluateClusterer(self.class.data)
+          else
+            evaluation.evaluateClusterer(@dataset)
+          end
+        else
+          evaluation.evaluateClusterer(args[0])
+        end
+
+        puts 'performing evaluation'
+        evaluation.clusterResultsToString
+      end
+
+      #Class methods module
+      module ClassMethods
+
+        def self.classifier_attr_accessor(*args)
+         
