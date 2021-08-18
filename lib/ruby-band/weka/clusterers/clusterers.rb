@@ -62,4 +62,23 @@ module Weka
           else
             init_clusterer
           end
-       
+        end
+      end
+    end
+
+    class FarthestFirst
+      include Utils
+      class Base < FarthestFirst
+        def initialize(&block)
+          super
+          if block_given?
+            init_instance_clusterer(&block)
+          else
+            init_clusterer
+          end
+        end
+      end
+    end
+
+	end
+end
