@@ -77,4 +77,17 @@ module Weka
       module ClassMethods
 
         def self.classifier_attr_accessor(*args)
-         
+          args.each do |arg|
+            # Here's the getter
+            self.class_eval("def #{arg};@#{arg};end")
+            # Here's the setter
+            self.class_eval("def set_#{arg}(val);@#{arg}=val;end")
+          end
+        end
+
+        classifier_attr_accessor :options,:data
+      end
+
+    end
+  end
+end
