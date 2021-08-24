@@ -254,4 +254,27 @@ Keywords=\
   USING,\
   UTC_DATE,\
   UTC_TIME,\
-  UTC_
+  UTC_TIMESTAMP,\
+  VALUES,\
+  VARBINARY,\
+  VARCHAR,\
+  VARCHARACTER,\
+  VARYING,\
+  WHEN,\
+  WHERE,\
+  WHILE,\
+  WITH,\
+  WRITE,\
+  XOR,\
+  YEAR_MONTH,\
+  ZEROFILL
+
+# The character to append to attribute names to avoid exceptions due to
+# clashes between keywords and attribute names
+KeywordsMaskChar=_
+
+#flags for loading and saving instances using DatabaseLoader/Saver
+nominalToStringLimit=50
+idColumn=auto_generated_id
+
+
