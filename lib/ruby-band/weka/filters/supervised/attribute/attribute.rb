@@ -15,4 +15,11 @@ module Weka
                       :PartitionMembership
 
    			class AttributeSelection
-          java_alias :evaluator, :setEvaluator, [Java::
+          java_alias :evaluator, :setEvaluator, [Java::Weka.attributeSelection.ASEvaluation]
+          java_alias :search, :setSearch, [Java::Weka.attributeSelection.ASSearch]
+  			end
+
+  		end
+  	end
+  end
+end
