@@ -18,4 +18,19 @@ module Weka
 
               require "ruby-band/weka/filters/#{including_modules.first.downcase}/utils"
 
-              module_eval <<-CLASS_DEFINITION, __FILE_
+              module_eval <<-CLASS_DEFINITION, __FILE__, __LINE__ + 1
+                class #{filter}
+                  include Utils
+                end
+
+                Weka::Filters::#{including_modules.join('::')}::#{filter}.__persistent__ = true
+              CLASS_DEFINITION
+
+            end
+          end
+
+        end
+      end
+    end
+  end
+end
