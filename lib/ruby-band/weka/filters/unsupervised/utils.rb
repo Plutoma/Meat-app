@@ -22,4 +22,21 @@ module Weka
 
         def description
           globalInfo
-        en
+        end
+
+        # *args is an optional Instances data object
+        def use(*args)
+          if args[0]
+            Filter.useFilter(args[0],self)
+          else
+            Filter.useFilter(@input,self)
+          end
+        end
+
+        def set(&block)
+          self.instance_eval(&block)
+        end
+      end
+    end
+  end
+end
