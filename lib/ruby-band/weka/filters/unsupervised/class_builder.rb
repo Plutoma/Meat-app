@@ -24,4 +24,13 @@ module Weka
                 end
 
                 Weka::Filters::#{including_modules.join('::')}::#{filter}.__persistent__ = true
-          
+              CLASS_DEFINITION
+
+            end
+          end
+
+        end
+      end
+    end
+  end
+end
