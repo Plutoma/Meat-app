@@ -21,4 +21,15 @@ module Weka
 
         class SubsetByExpression
           def description
-     
+            begin
+              puts globalInfo.split("\n").each {|line| puts line}
+            rescue NoMethodError
+              puts "Sorry, no description available for this filter"
+            end
+          end
+        end
+
+      end
+    end
+  end
+end
