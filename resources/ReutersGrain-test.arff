@@ -1,0 +1,8 @@
+@relation 'Reuters-21578 Grain ModApte Test-weka.filters.unsupervised.attribute.NumericToBinary-weka.filters.unsupervised.instance.RemoveFolds-S0-N5-F1'
+
+@attribute Text string
+@attribute class-att {0,1}
+
+@data
+
+'ASIAN EXPORTERS FEAR DAMAGE FROM U.S.-JAPAN RIFT Mounting trade friction between the\nU.S. And Japan has raised fears among many of Asia\'s exporting\nnations that the row could inflict far-reaching economic\ndamage, businessmen and officials said.\n    They told Reuter corresp
